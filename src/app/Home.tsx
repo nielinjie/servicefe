@@ -49,17 +49,15 @@ export const Home: FC = () => {
   return (
     <>
       <div>
-        <Form className={"searching"}>
+        <Form className={"searching"} layout={"vertical"}>
           <Form.Item
             label="仅显示未通过检查 - "
-          >
-            <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />}
+          ><Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />}
               defaultChecked onChange={(value) => setNoPassOnly(value)} />
           </Form.Item>
           <Form.Item
             label={"问题等级 - 高于：" + minLevel}
-          >
-            <Slider
+          ><Slider
               min={1} max={5} step={1}
               defaultValue={minLevel}
               onChange={(value) => setMinLevel((value as number))}
