@@ -5,13 +5,13 @@ import { Home } from './home';
 import './index.css';
 
 const client = createClient({
-  url: 'http://localhost:3001/graphql',
+  url: 'http://localhost:9000/graphql',
 });
 
 export const App: FC = () => (
   <Provider value={client}>
     <main>
-      <h1>Todos</h1>
+      <h1>Issues</h1>
       <Home />
     </main>
   </Provider>
