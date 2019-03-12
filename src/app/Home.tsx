@@ -8,7 +8,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import "antd/dist/antd.css";
 import "./index.css"
-import { Slider, Form, Input, Checkbox, Icon, Switch, Rate } from 'antd';
+import { Slider, Form, Input, Checkbox, Icon, Switch, Rate, Button, Spin } from 'antd';
 
 interface QueryResponse {
   issues: Array<{
@@ -34,7 +34,7 @@ export const Home: FC = () => {
 
   const getContent = () => {
     if (res.fetching || res.data === undefined) {
-      return <Loading />;
+      return     <Spin style={{justifyContent:'center'}}/>      ;
     }
 
     if (res.error) {
@@ -49,7 +49,7 @@ export const Home: FC = () => {
   return (
     <>
       <div>
-        <Form className={"searching"} layout={"vertical"}>
+        <Form className={"searching"} layout={"horizontal"} >
           <Form.Item
             label="仅显示未通过检查 - "
           ><Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />}
@@ -63,10 +63,14 @@ export const Home: FC = () => {
               onChange={(value) => setMinLevel((value as number))}
             />
           </Form.Item>
+          <Form.Item>
+          <Button onClick={refetch}>重新载入</Button>
+          </Form.Item>
         </Form>
       </div>
+      <div className="panel">
       {getContent()}
-      <button onClick={refetch}>Refetch</button>
+      </div>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { format } from 'timeago.js';
-import { Typography, Row, Col, Statistic } from 'antd';
+import { Typography, Row, Col, Statistic, List, Icon, Avatar } from 'antd';
 
 
 
@@ -32,11 +32,19 @@ export const IssueList = props => {
                     <Statistic title="显示问题总数 - " value={result.length} />
                 </Col>
             </Row>
-            <ul>
-                {result.slice(0, 100).map(issue => {
-                    return <Issue key={issue.id} {...issue}></Issue>
-                })}
-            </ul>
+            <List className="issue-list"
+                itemLayout="horizontal"
+                dataSource={result.slice(0,100)}
+                renderItem={item => (
+                    <List.Item>
+                        <List.Item.Meta
+                            avatar={<Avatar className={"level-"+item.inspectPoint.level}>{item.inspectPoint.level}</Avatar>}
+                            title={item.inspectPoint.id}
+                            description={item.message}
+                        />
+                    </List.Item>
+                )}
+            />
         </>
     )
 }

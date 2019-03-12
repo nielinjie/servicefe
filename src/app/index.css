@@ -9,7 +9,9 @@ body {
   justify-content: center;
 }
 
-
+main{
+  width: 75%;
+}
 
 h1 {
   color: #2d4a4a;
@@ -44,7 +46,6 @@ li {
   background: #fff;
   border-radius: 4px;
   padding: 20px;
-
 }
 
 .counting {
@@ -52,4 +53,19 @@ li {
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
+}
+/* .issue-list{
+  background: white;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+} */
+.panel {
+  background: white;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+.level-5{
+  background: crimson;
 }
