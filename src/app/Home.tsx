@@ -1,91 +1,50 @@
 import React, { FC, useCallback, useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from 'urql';
-import { Error, Loading, Issue, IssueList } from './components';
+import { Error, IssueList } from './components';
 
-import zhCN from 'antd/lib/locale-provider/zh_CN';
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import "antd/dist/antd.css";
 import "./index.css"
-import { Slider, Form, Input, Checkbox, Icon, Switch, Rate, Button, Spin } from 'antd';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Welcom, Issues } from "./pages"
+import { Menu, Layout } from 'antd';
 
-interface QueryResponse {
-  issues: Array<{
-    id: string;
-    message: string;
-    pass: boolean;
-    inspectPoint: {
-      level: number
-    }
-  }>;
-}
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
+const {
+  Header, Content, Footer, Sider,
+} = Layout;
 
 export const Home: FC = () => {
-  const [res, executeQuery] = useQuery<QueryResponse>({ query: IssueQuery });
-  const refetch = useCallback(
-    () => executeQuery({ requestPolicy: 'network-only' }),
-    []
-  );
-
-  const [minLevel, setMinLevel] = useState(3);
-  const [noPassOnly, setNoPassOnly] = useState(true)
-
-
-  const getContent = () => {
-    if (res.fetching || res.data === undefined) {
-      return     <Spin style={{justifyContent:'center'}}/>      ;
-    }
-
-    if (res.error) {
-      return <Error>{res.error.message}</Error>;
-    }
-
-    return (
-      <IssueList issues={res.data.issues} minLevel={minLevel} noPassOnly={noPassOnly}></IssueList>
-    );
-  };
-
   return (
-    <>
-      <div>
-        <Form className={"searching"} layout={"horizontal"} >
-          <Form.Item
-            label="仅显示未通过检查 - "
-          ><Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />}
-              defaultChecked onChange={(value) => setNoPassOnly(value)} />
-          </Form.Item>
-          <Form.Item
-            label={"问题等级 - 高于：" + minLevel}
-          ><Slider
-              min={1} max={5} step={1}
-              defaultValue={minLevel}
-              onChange={(value) => setMinLevel((value as number))}
-            />
-          </Form.Item>
-          <Form.Item>
-          <Button onClick={refetch}>重新载入</Button>
-          </Form.Item>
-        </Form>
-      </div>
-      <div className="panel">
-      {getContent()}
-      </div>
-    </>
-  );
-};
-
-const IssueQuery = gql`
-query{
-  issues{
-    id
-    message
-    pass
-    date
-    inspectPoint{
-      id
-      level
-    }
-  }
+    <Router>
+      <Layout>
+        <Sider style={{
+          overflow: 'auto', height: '100vh', position: 'fixed', left: 0,
+        }}
+        ></Sider>
+         <Menu theme="dark" mode="inline" style={{width:200}}
+        >
+          <Menu.Item key="1">
+            <Link to="/">主页</Link>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/issues">问题</Link>
+          </Menu.Item>
+        </Menu>
+        <Layout style={{ marginLeft: 200 }}>
+          <Header style={{ background: '#fff', padding: 0 }} />
+          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <Route exact path="/" component={Welcom} />
+            <Route path="/issues" component={Issues} />
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Ant Design ©2018 Created by Ant UED
+      </Footer>
+        </Layout>
+      </Layout>
+    </Router>
+  )
 }
-`;

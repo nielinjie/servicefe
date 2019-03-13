@@ -1,41 +1,4 @@
-body {
-  background: #488;
-  font-family: sans-serif;
-}
 
-#root {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-main{
-  width: 75%;
-}
-
-h1 {
-  color: #2d4a4a;
-}
-
-h4 {
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background: #fff;
-  /* display: flex; */
-  justify-content: space-between;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 4px;
-}
 
 
 .strikethrough {
@@ -67,5 +30,5 @@ li {
   border-radius: 4px;
 }
 .level-5{
-  background: crimson;
+  background: #8a0a23;
 }

@@ -10,10 +10,9 @@ const client = createClient({
 
 export const App: FC = () => (
   <Provider value={client}>
-    <main>
-      <h1>Issues</h1>
+   
       <Home />
-    </main>
+  
   </Provider>
 );
 
