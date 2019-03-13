@@ -34,6 +34,7 @@ export const IssueList = props => {
             </Row>
             <List className="issue-list"
                 itemLayout="horizontal"
+                //TODO pageing机制
                 dataSource={result.slice(0,100)}
                 renderItem={item => (
                     <List.Item>
